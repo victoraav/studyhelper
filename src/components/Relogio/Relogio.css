@@ -1,0 +1,39 @@
+
+body{
+    text-align: center;
+    max-width: 100%;
+}
+
+section{
+    margin-top: 30px;
+    text-align: center;
+    padding: 50px;
+    border: solid;
+    display: inline-block;
+    
+}
+
+
+
+.formulario h2{
+    font-size: 30px;
+    margin-bottom: 20px;
+
+}
+
+.formulario h3{
+    padding: 5px;
+    margin: 20px;
+    border: solid;
+    display: inline;
+    border-radius: 90px;
+    
+}
+
+.formulario input{
+    margin-top: 20px;
+}
+
+.start{
+    display: inline;
+}
