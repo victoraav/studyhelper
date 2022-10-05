@@ -1,32 +1,43 @@
 import "./Relogio.css"
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
+import * as React from "react";
 
 const Relogio = (props) =>{
 
 
-    const[tempo, setTempo] = useState('0');
-    const[minutos,setMinutos] = useState('00');
-    const[segundos,setSegundos] = useState('59');
+    const[tempo, settempo] = useState('0');
+    const[minutos,setminutos] = useState('00');
+    const[segundos,setsegundos] = useState('00');
+    
+    
 
+    React.useEffect(() => {
+        const timer =
+          segundos > 0 && setInterval(() => setsegundos(segundos - 1), 1000);
+        return () => clearInterval(timer);
+      }, [segundos]);
 
-    /*function diminuiMinuto(){
-        setMinutos(minutos-1)
-    }
+      React.useEffect(() => {
+        const timerminutos =
+          minutos > 0 && setInterval(() => {
+            setminutos(minutos - 1);
+            setsegundos(59)
+           } , 60000);
+          
+        return () => clearInterval(timerminutos);
+      }, [minutos]);  
 
-    let intervalID;
+    
+    
 
-    function Timer(){
-        intervalID = setInterval(diminuiMinuto, 1000);
-        
-    }  TIMER NAO FUNCIONANDO 
-    add onClick={Timer} no botao de start*/
     
     const aoDigitado = evento =>{
-       setTempo(evento.target.value)
+       settempo(evento.target.value)
     }
 
     const definir = defineTempo =>{
-        setMinutos(tempo)
+        setsegundos(59)
+        setminutos(tempo-1)
         defineTempo.preventDefault()
     }
 
@@ -42,12 +53,13 @@ const Relogio = (props) =>{
             <h2>Study Time</h2>
             <h3>{minutos}:{segundos}</h3>
             <form onSubmit={definir}>
-                <input type="number" id="tempo" value={tempo} onChange={aoDigitado}></input>
-                <button>Set</button>
+                <input type="number" id="tempo" value={tempo} onChange={aoDigitado} min='1'></input>
+                <button className="setar">Set</button>
                 <br></br>
-                <button className="start" >Start</button>
-                <button onClick={refreshPage} >Reset</button>
+                
+                <button onClick={refreshPage} className="resetar">Reset</button>
             </form>
+            
         </section>
         
     )
